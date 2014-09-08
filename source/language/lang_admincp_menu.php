@@ -170,6 +170,7 @@ $lang = array
 	'menu_tools_fileperms' => '文件权限检查',
 	'menu_tools_hookcheck' => '嵌入点校验',
 	'menu_tools_filecheck' => '文件校验',
+    'menu_tools_spider' => '数据抓取',
 	'menu_forum_scheme' => '站点方案管理',
 	'menu_db' => '数据库',
 	'menu_postsplit' => '帖子分表',
