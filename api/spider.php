@@ -13,10 +13,14 @@
  * ��Ȩ����֧��: 1838225378@qq.com
  * $Createtime: 2014-09-09 00:17
  */
-print_r($_POST);
+
 
 //user register
 require '../source/class/class_core.php';
+$discuz = C::app();
+$discuz->init();
+
+
 $newusername = trim($_POST['username']);
 $newpassword = trim($_POST['userid']);
 $newemail = $newpassword . '@youjwu.com';
