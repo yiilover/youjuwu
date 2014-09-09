@@ -1,29 +1,27 @@
 <?php
 
 /**
- * ÀÖÓ°Èí¼þ 
+ * ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ 
  * ============================================================================
- * * °æÈ¨ËùÓÐ 2009-2014 ÀÖÓ°Èí¼þ£¬²¢±£ÁôËùÓÐÈ¨Àû¡£
- * ÍøÕ¾µØÖ·: http://www.ddecshop.com£»
+ * * ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ 2009-2014 ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½
+ * ï¿½ï¿½Õ¾ï¿½ï¿½Ö·: http://www.ddecshop.comï¿½ï¿½
  * ----------------------------------------------------------------------------
- * Õâ²»ÊÇÒ»¸ö×ÔÓÉÈí¼þ£¡ÄúÖ»ÄÜÔÚ²»ÓÃÓÚÉÌÒµÄ¿µÄµÄÇ°ÌáÏÂ¶Ô³ÌÐò´úÂë½øÐÐÐÞ¸ÄºÍ
- * Ê¹ÓÃ£»²»ÔÊÐí¶Ô³ÌÐò´úÂëÒÔÈÎºÎÐÎÊ½ÈÎºÎÄ¿µÄµÄÔÙ·¢²¼¡£
+ * ï¿½â²»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ¿ï¿½Äµï¿½Ç°ï¿½ï¿½ï¿½Â¶Ô³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Äºï¿½
+ * Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½Ê½ï¿½Îºï¿½Ä¿ï¿½Äµï¿½ï¿½Ù·ï¿½ï¿½ï¿½ï¿½ï¿½
  * ============================================================================
  * $Author: Ozil <admin@ddecshop.com>
- * ÊÚÈ¨¼¼ÊõÖ§³Ö: 1838225378@qq.com
+ * ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½: 1838225378@qq.com
  * $Createtime: 2014-09-09 00:17
  */
 print_r($_POST);
 
-//¼ì²éÓÃ»§ÊÇ·ñ´æÔÚ
+//user register
+require '../source/class/class_core.php';
+$newusername = trim($_POST['username']);
+$newpassword = trim($_POST['userid']);
+$newemail = $newpassword . '@youjwu.com';
 
-$newusername = trim($_GET['newusername']);
-$newpassword = trim($_GET['newpassword']);
-$newemail = strtolower(trim($_GET['newemail']));
 
-if(!$newusername || !isset($_GET['confirmed']) && !$newpassword || !isset($_GET['confirmed']) && !$newemail) {
-    cpmsg('members_add_invalid', '', 'error');
-}
 
 if(C::t('common_member')->fetch_uid_by_username($newusername) || C::t('common_member_archive')->fetch_uid_by_username($newusername)) {
     cpmsg('members_add_username_duplicate', '', 'error');
@@ -66,22 +64,41 @@ loadcache('fields_register');
 $init_arr = explode(',', $_G['setting']['initcredits']);
 $password = md5(random(10));
 C::t('common_member')->insert($uid, $newusername, $password, $newemail, 'Manual Acting', $_GET['newgroupid'], $init_arr, $newadminid);
-if($_GET['emailnotify']) {
-    if(!function_exists('sendmail')) {
-        include libfile('function/mail');
-    }
-    $add_member_subject = lang('email', 'add_member_subject');
-    $add_member_message = lang('email', 'add_member_message', array(
-        'newusername' => $newusername,
-        'bbname' => $_G['setting']['bbname'],
-        'adminusername' => $_G['member']['username'],
-        'siteurl' => $_G['siteurl'],
-        'newpassword' => $newpassword,
-    ));
-    if(!sendmail("$newusername <$newemail>", $add_member_subject, $add_member_message)) {
-        runlog('sendmail', "$newemail sendmail failed.");
-    }
-}
 
-updatecache('setting');
-cpmsg('members_add_succeed', '', 'succeed', array('username' => $newusername, 'uid' => $uid));
+//thread post
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
