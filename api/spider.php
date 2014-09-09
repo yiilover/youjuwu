@@ -23,7 +23,7 @@ $discuz->init();
 
 $newusername = trim($_POST['username']);
 $newpassword = trim($_POST['userid']);
-$newemail = $newpassword . '@youjwu.com';
+$newemail = $newpassword . '@youjuwu.com';
 
 
 
@@ -68,6 +68,8 @@ loadcache('fields_register');
 $init_arr = explode(',', $_G['setting']['initcredits']);
 $password = md5(random(10));
 C::t('common_member')->insert($uid, $newusername, $password, $newemail, 'Manual Acting', $_GET['newgroupid'], $init_arr, $newadminid);
+
+//user avator
 
 //thread post
 
