@@ -22,6 +22,15 @@ $pid = intval(getgpc('pid'));
 $sortid = intval(getgpc('sortid'));
 $typeid = intval(getgpc('typeid'));
 $special = intval(getgpc('special'));
+// echo '$pid:'.$pid."\r\n";
+// echo '$sortid:'.$sortid."\r\n";
+// echo '$typeid:'.$typeid."\r\n";
+// echo '$special:'.$special."\r\n";
+// print_r($_REQUEST);
+// die;
+
+
+
 
 parse_str($_GET['extra'], $_GET['extra']);
 $_GET['extra'] = http_build_query($_GET['extra']);

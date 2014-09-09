@@ -1,0 +1,48 @@
+
+$pid:0
+$sortid:0
+$typeid:0
+$special:0
+Array
+(
+    [mod] => post
+    [action] => newthread
+    [fid] => 36
+    [extra] => 
+    [topicsubmit] => yes
+    [formhash] => fd282350
+    [posttime] => 1410250059
+    [wysiwyg] => 1
+    [subject] => xxx
+    [message] => oooooooooooooo
+
+    [allownoticeauthor] => 1
+    [usesig] => 1
+    [seccodehash] => cSY4EzFQ
+    [seccodemodid] => forum::post
+    [seccodeverify] => cpqy
+    [save] => 
+    [bdshare_firstime] => 1406465270633
+    [DOT_itip_hide] => 1
+    [DOT_username] => aijiacms
+    [SRecentlyGoods] => 1
+    [RRecentlyGoods] => 1
+    [a9aO_2132_saltkey] => iPS2PHR2
+    [a9aO_2132_lastvisit] => 1410183792
+    [a9aO_2132_nofavfid] => 1
+    [a9aO_2132_visitedfid] => 36D37
+    [a9aO_2132_pluginnotice] => 1
+    [a9aO_2132_sendmail] => 1
+    [a9aO_2132_ulastactivity] => 8f12PvQAmuphi3O9WsFORbxxylKV81kjjvPE7WRl+4x5wd7RedC3
+    [a9aO_2132_auth] => 9f2a+ihYMQYAKf/cw62q0sEDl6IhE6pF/UanLUw+jSd3vFWtpiYA1nv9VYzXY0J3EooYuOMcb9jk0tziCwVT
+    [a9aO_2132_lastcheckfeed] => 2|1410250023
+    [a9aO_2132_lip] => 127.0.0.1,1410250023
+    [a9aO_2132_forum_lastvisit] => D_37_1410187456D_36_1410250029
+    [a9aO_2132_st_t] => 2|1410250059|be377b13403f1075235f02e8201066b5
+    [a9aO_2132_sid] => Y4EzFQ
+    [a9aO_2132_editormode_e] => 1
+    [a9aO_2132_noticeTitle] => 1
+    [a9aO_2132_smile] => 1D1
+    [a9aO_2132_seccode] => 4.06fca84fd2788e2aa1
+    [a9aO_2132_lastact] => 1410250225	misc.php	seccode
+)
