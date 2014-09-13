@@ -46,3 +46,99 @@ Array
     [a9aO_2132_seccode] => 4.06fca84fd2788e2aa1
     [a9aO_2132_lastact] => 1410250225	misc.php	seccode
 )
+
+
+
+
+
+Array
+(
+    [subject] => ¶¼ÊÇ
+    [message] => dsdsd
+
+    [typeid] => 0
+    [sortid] => 0
+    [special] => 0
+    [publishdate] => 1410515963
+    [save] =>
+    [sticktopic] =>
+    [digest] =>
+    [readperm] => 0
+    [isanonymous] =>
+    [price] =>
+    [typeexpiration] =>
+    [ordertype] =>
+    [hiddenreplies] =>
+    [allownoticeauthor] => 1
+    [tags] =>
+    [bbcodeoff] =>
+    [smileyoff] =>
+    [parseurloff] =>
+    [usesig] => 1
+    [htmlon] =>
+    [geoloc] =>
+)
+
+Array
+(
+    [fid] => 36
+    [author] => a108
+    [authorid] => 10
+    [dateline] => 1409932800
+    [lastpost] => 1409932800
+    [subject] => 2
+    [message] => hwlllllllllllllllllllllls
+    [typeid] => 0
+    [sortid] => 0
+    [special] => 0
+)
+
+Array
+(
+    [fid] => 36
+    [author] => a110
+    [authorid] => 12
+    [dateline] => 1409932800
+    [lastpost] => 1409932800
+    [publishdate] => 1409932800
+    [subject] => 2
+    [message] => hwlllllllllllllllllllllls
+    [typeid] => 0
+    [sortid] => 0
+    [special] => 0
+    [save] =>
+    [sticktopic] =>
+    [digest] =>
+    [readperm] => 0
+    [isanonymous] =>
+    [price] =>
+    [typeexpiration] =>
+    [ordertype] =>
+    [hiddenreplies] =>
+    [allownoticeauthor] => 1
+    [tags] =>
+    [bbcodeoff] =>
+    [smileyoff] =>
+    [parseurloff] =>
+    [usesig] =>
+    [htmlon] =>
+    [geoloc] =>
+)
+
+Array
+(
+    [replycredit] => 0
+    [subject] => dsdsd
+    [save] =>
+    [allownoticeauthor] => 1
+    [readperm] => 0
+    [price] =>
+    [typeid] => 0
+    [sortid] => 0
+    [publishdate] => 1410517179
+    [special] => 0
+    [tags] => dsdsd
+    [message] => ssssssssss
+
+    [usesig] => 1
+)
