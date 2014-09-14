@@ -6,6 +6,8 @@ $newusername = trim($_POST['username']);
 $newpassword = trim($_POST['userid']);
 $newemail = $newpassword . '@youjuwu.com';
 $user = C::t('common_member')->fetch_by_username($newusername);
+
+
 if(empty($user)){
     loaducenter();
     $uid = uc_user_register(addslashes($newusername), $newpassword, $newemail);
@@ -91,6 +93,7 @@ $pid = insertpost(array(
 updatemembercount($uid, array('extcredits2' => 2, 'posts' => 1, 'threads' =>1));
 updatemoderate('tid', $tid);
 C::t('forum_forum')->update_forum_counter($fid, 1, 1, 1);
+$upload = new forum_upload2();
 function insertpost($data) {
     if(isset($data['tid'])) {
         $thread = C::t('forum_thread')->fetch($data['tid']);
