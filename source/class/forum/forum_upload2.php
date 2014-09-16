@@ -27,18 +27,21 @@ class forum_upload2 {
 
 
 
-        $_G['uid'] = $this->uid = intval($_GET['uid']);
-		$swfhash = md5(substr(md5($_G['config']['security']['authkey']), 8).$this->uid);
+        $_G['uid'] = $this->uid = intval($_POST['uid']);
+        $_G['fid'] = $_POST['fid'];
+
+//		$swfhash = md5(substr(md5($_G['config']['security']['authkey']), 8).$this->uid);
 		$this->aid = 0;
 		$this->getaid = $getaid;
 		$this->simple = !empty($_GET['simple']) ? $_GET['simple'] : 0;
 
-		if($_GET['hash'] != $swfhash) {
-			return $this->uploadmsg(10);
-		}
+//		if($_GET['hash'] != $swfhash) {
+//			return $this->uploadmsg(10);
+//		}
 
 
-		$upload = new discuz_upload();
+		$upload = new discuz_upload2();
+
 		$upload->init($_FILES['Filedata'], 'forum');
 		$this->attach = &$upload->attach;
 

@@ -1,4 +1,7 @@
 <?php
+
+//config
+
 //user register
 require '../source/class/class_core.php';
 C::app()->init();
@@ -93,7 +96,15 @@ $pid = insertpost(array(
 updatemembercount($uid, array('extcredits2' => 2, 'posts' => 1, 'threads' =>1));
 updatemoderate('tid', $tid);
 C::t('forum_forum')->update_forum_counter($fid, 1, 1, 1);
-$upload = new forum_upload2();
+$reg="/src=\"(.*?)\"/";
+preg_match_all($reg,$_POST['message'],$templist);
+
+foreach($templist[1] as $r){
+    if(handleimg($r)){
+        uploadimg(handleimg($r));
+    }
+}
+
 function insertpost($data) {
     if(isset($data['tid'])) {
         $thread = C::t('forum_thread')->fetch($data['tid']);
@@ -110,8 +121,37 @@ function insertpost($data) {
     savecache('max_post_id', $pid);
     return $pid;
 }
-
-
+function handleimg($imgurl){
+    $filename = basename($imgurl);
+    $dir='D:\data/img3/'.$filename;
+    getimg($imgurl,$dir);
+    return $dir;
+}
+function getimg($url = "", $filename = ""){
+    $hander = curl_init();
+    $fp = fopen($filename,'wb');
+    curl_setopt($hander,CURLOPT_URL,$url);
+    curl_setopt($hander,CURLOPT_FILE,$fp);
+    curl_setopt($hander,CURLOPT_HEADER,0);
+    curl_setopt($hander,CURLOPT_FOLLOWLOCATION,1);
+    curl_setopt($hander,CURLOPT_TIMEOUT,60);
+    curl_setopt($hander, CURLINFO_HEADER_OUT, true);
+    curl_exec($hander);
+    curl_close($hander);
+    fclose($fp);
+    return true;
+}
+function uploadimg($dir){
+    $url = 'http://www.youjuwu.com/upload.php';
+    $ch=curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, array('Filedata'=>'@'.$dir));
+    curl_exec($ch);
+    curl_close($ch);
+}
 
 
 

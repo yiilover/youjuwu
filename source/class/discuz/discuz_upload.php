@@ -25,7 +25,6 @@ Class discuz_upload{
 	}
 
 	function init($attach, $type = 'temp', $extid = 0, $forcename = '') {
-
 		if(!is_array($attach) || empty($attach) || !$this->is_upload_file($attach['tmp_name']) || trim($attach['name']) == '' || $attach['size'] == 0) {
 			$this->attach = array();
 			$this->errorcode = -1;
