@@ -68,6 +68,16 @@ $message = html2bbcode($_POST['message']);
 $lastposter = $author;
 $status = '32';
 $icon = '-1';
+
+
+//$modthread = C::m('forum_thread');
+//$bfmethods = $afmethods = array();
+//$bfmethods[] = array('class' => 'extend_thread_replycredit', 'method' => 'before_newthread');
+//$afmethods[] = array('class' => 'extend_thread_replycredit', 'method' => 'after_newthread');
+//$bfmethods[] = array('class' => 'extend_thread_allowat', 'method' => 'before_newthread');
+//$afmethods[] = array('class' => 'extend_thread_allowat', 'method' => 'after_newthread');
+//$modthread->attach_before_methods('newthread', $bfmethods);
+//$modthread->attach_after_methods('newthread', $afmethods);
 $newthread = array(
     'fid' => $fid,
     'author' => $author,
@@ -96,14 +106,18 @@ $pid = insertpost(array(
 updatemembercount($uid, array('extcredits2' => 2, 'posts' => 1, 'threads' =>1));
 updatemoderate('tid', $tid);
 C::t('forum_forum')->update_forum_counter($fid, 1, 1, 1);
-$reg="/src=\"(.*?)\"/";
-preg_match_all($reg,$_POST['message'],$templist);
-
+//attachment upload
+preg_match_all("/src=\"(.*?)\"/",$_POST['message'],$templist);
 foreach($templist[1] as $r){
     if(handleimg($r)){
-        uploadimg(handleimg($r));
+        $aid = uploadimg(handleimg($r));
+        $attachnew[$aid]['description']='';
     }
 }
+$modnewthreads = false;
+updateattach($modnewthreads, $tid, $pid, $attachnew);
+
+
 
 function insertpost($data) {
     if(isset($data['tid'])) {
@@ -149,8 +163,9 @@ function uploadimg($dir){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, array('Filedata'=>'@'.$dir));
-    curl_exec($ch);
+    $res = curl_exec($ch);
     curl_close($ch);
+    return json_decode($res,true);
 }
 
 

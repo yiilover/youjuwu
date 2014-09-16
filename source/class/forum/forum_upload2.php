@@ -129,7 +129,8 @@ class forum_upload2 {
 		if($_GET['type'] != 'image' && $upload->attach['isimage']) {
 			$upload->attach['isimage'] = -1;
 		}
-		$this->aid = $aid = getattachnewaid($this->uid);
+		$this->aid = $aid =  getattachnewaid($this->uid);
+        json_encode($aid);
 		$insert = array(
 			'aid' => $aid,
 			'dateline' => $_G['timestamp'],
