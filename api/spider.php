@@ -4,6 +4,7 @@
 
 //user register
 require '../source/class/class_core.php';
+require '../data/img.inc.php';
 C::app()->init();
 $newusername = trim($_POST['username']);
 $newpassword = trim($_POST['userid']);
@@ -52,6 +53,13 @@ if(empty($user)){
 }
 
 //user avator
+if($_POST['userface']!='http://img3.douban.com/icon/user_normal.jpg'){
+    $filename = basename($_POST['userface']);
+    preg_match("/u([0-9]*?)-/",$filename,$return);
+    $avatarnum = $return[1];
+    $imgurl = 'http://img3.douban.com/icon/ul'.$avatarnum.'.jpg';
+    saveimg($imgurl,'user');
+}
 
 //thread post
 require_once libfile('class/credit');
@@ -63,21 +71,16 @@ $authorid = $uid;
 $dateline = strtotime($_POST['posttime']);
 $lastpost = $dateline;
 $publishdate = $dateline;
-$subject = $_POST['subject'];
-$message = html2bbcode($_POST['message']);
+$subject = $_POST['fullsubject']?$_POST['fullsubject']:$_POST['subject'];
+$message = explode("<div class=\"topic-figure cc\">",$_POST['message']);
+if(is_array($message)){
+    $message = $message[0];
+}
+$message = html2bbcode($message);
 $lastposter = $author;
 $status = '32';
 $icon = '-1';
 
-
-//$modthread = C::m('forum_thread');
-//$bfmethods = $afmethods = array();
-//$bfmethods[] = array('class' => 'extend_thread_replycredit', 'method' => 'before_newthread');
-//$afmethods[] = array('class' => 'extend_thread_replycredit', 'method' => 'after_newthread');
-//$bfmethods[] = array('class' => 'extend_thread_allowat', 'method' => 'before_newthread');
-//$afmethods[] = array('class' => 'extend_thread_allowat', 'method' => 'after_newthread');
-//$modthread->attach_before_methods('newthread', $bfmethods);
-//$modthread->attach_after_methods('newthread', $afmethods);
 $newthread = array(
     'fid' => $fid,
     'author' => $author,
@@ -109,8 +112,9 @@ C::t('forum_forum')->update_forum_counter($fid, 1, 1, 1);
 //attachment upload
 preg_match_all("/src=\"(.*?)\"/",$_POST['message'],$templist);
 foreach($templist[1] as $r){
-    if(handleimg($r)){
-        $aid = uploadimg(handleimg($r));
+    $dir = saveimg($r);
+    if($dir){
+        $aid = uploadimg($dir);
         $attachnew[$aid]['description']='';
     }
 }
@@ -135,9 +139,9 @@ function insertpost($data) {
     savecache('max_post_id', $pid);
     return $pid;
 }
-function handleimg($imgurl){
+function saveimg($imgurl,$type='forum'){
     $filename = basename($imgurl);
-    $dir='D:\data/img3/'.$filename;
+    $dir=$type=='user'?USERIMG.$filename:FORUMIMG.$filename;
     getimg($imgurl,$dir);
     return $dir;
 }
