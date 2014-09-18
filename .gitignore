@@ -6,3 +6,5 @@
 /config/**
 /.idea/
 /.idea/**
+/uc_server/data/
+/uc_server/data/**
