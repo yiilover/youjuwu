@@ -4,9 +4,5 @@
 /install/**
 /config/
 /config/**
-/uc_client/
-/uc_client/**
-/uc_server/
-/uc_server/**
 /.idea/
 /.idea/**
