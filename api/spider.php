@@ -49,17 +49,21 @@ if(empty($user)){
     C::t('common_member')->insert($uid, $newusername, $password, $newemail, 'Manual Acting', $_POST['newgroupid'], $init_arr, $newadminid);
 }else{
     $newusername = $user['username'];
-    $uid = $user['uid'];
+    $uid =  $user['uid'];
 }
+$_G['uid'] = $uid;
 
-//user avator
+//user avatar
 if($_POST['userface']!='http://img3.douban.com/icon/user_normal.jpg'){
     $filename = basename($_POST['userface']);
     preg_match("/u([0-9]*?)-/",$filename,$return);
     $avatarnum = $return[1];
     $imgurl = 'http://img3.douban.com/icon/ul'.$avatarnum.'.jpg';
-    saveimg($imgurl,'user');
+    $dir = saveimg($imgurl,'user');
+    uploadavatar($dir);
 }
+
+
 
 //thread post
 require_once libfile('class/credit');
@@ -170,6 +174,19 @@ function uploadimg($dir){
     $res = curl_exec($ch);
     curl_close($ch);
     return json_decode($res,true);
+}
+function uploadavatar($dir){
+    global $_G;
+    $uid = $_G['uid'];
+    $url = 'http://www.youjuwu.com/uc_server/index.php?m=user&a=uploadavatar2';
+    $ch=curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, array('Filedata'=>'@'.$dir,'uid'=>$uid));
+    curl_exec($ch);
+    curl_close($ch);
 }
 
 
