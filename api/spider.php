@@ -51,7 +51,7 @@ if(empty($user)){
     $newusername = $user['username'];
     $uid =  $user['uid'];
 }
-$_G['uid'] = $uid;
+
 
 //user avatar
 if($_POST['userface']!='http://img3.douban.com/icon/user_normal.jpg'){
@@ -60,7 +60,7 @@ if($_POST['userface']!='http://img3.douban.com/icon/user_normal.jpg'){
     $avatarnum = $return[1];
     $imgurl = 'http://img3.douban.com/icon/ul'.$avatarnum.'.jpg';
     $dir = saveimg($imgurl,'user');
-    uploadavatar($dir);
+    uploadavatar($dir,$uid);
 }
 
 
@@ -175,9 +175,7 @@ function uploadimg($dir){
     curl_close($ch);
     return json_decode($res,true);
 }
-function uploadavatar($dir){
-    global $_G;
-    $uid = $_G['uid'];
+function uploadavatar($dir,$uid){
     $url = 'http://www.youjuwu.com/uc_server/index.php?m=user&a=uploadavatar2';
     $ch=curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
