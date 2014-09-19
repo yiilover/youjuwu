@@ -427,7 +427,7 @@ $lang = array (
   'temporarily_to_remind' => '暂不提醒',
   'myitem' => '我的',
   'mypost' => '帖子',
-  'developer' => '镇宅玄猫',
+  'developer' => 'Ozil',
 );
 
 ?>

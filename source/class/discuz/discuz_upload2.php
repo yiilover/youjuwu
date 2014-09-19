@@ -25,6 +25,7 @@ Class discuz_upload2{
     }
 
     function init($attach, $type = 'temp', $extid = 0, $forcename = '') {
+        global $_G;
         if(!is_array($attach) || empty($attach) || !$this->is_upload_file($attach['tmp_name']) || trim($attach['name']) == '' || $attach['size'] == 0) {
             $this->attach = array();
             $this->errorcode = -1;
@@ -188,8 +189,15 @@ Class discuz_upload2{
     }
 
     function save_to_local($source, $target) {
+        global $_G;
         if(!file_exists($source)){
             echo 'file not exist!';
+        }
+        //watermark
+        require_once libfile('class/image');
+        $image = new image;
+        if($_G['setting']['watermarkstatus'] && empty($_G['forum']['disablewatermark'])) {
+            $image->Watermark($source, '', 'forum');
         }
         if(!discuz_upload2::is_upload_file($source)) {
             $succeed = false;
@@ -205,6 +213,8 @@ Class discuz_upload2{
             fclose($fp_s); fclose($fp_t);
             $succeed = true;
         }
+
+
         if($succeed)  {
             $this->errorcode = 0;
             @chmod($target, 0644); @unlink($source);
