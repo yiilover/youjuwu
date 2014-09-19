@@ -69,7 +69,7 @@ if($_POST['userface']!='http://img3.douban.com/icon/user_normal.jpg'){
 require_once libfile('class/credit');
 require_once libfile('function/post');
 require_once libfile('function/editor');
-$fid = 36;
+$fid = $_POST['fid'];
 $author = $newusername;
 $authorid = $uid;
 $dateline = strtotime($_POST['posttime']);
