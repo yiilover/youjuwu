@@ -428,6 +428,7 @@ $lang = array (
   'myitem' => '我的',
   'mypost' => '帖子',
   'developer' => 'Ozil',
+  'marketcoporation' => '商务合作请联系',
 );
 
 ?>
