@@ -76,10 +76,8 @@ $dateline = strtotime($_POST['posttime']);
 $lastpost = $dateline;
 $publishdate = $dateline;
 $subject = $_POST['fullsubject']?$_POST['fullsubject']:$_POST['subject'];
-$message = explode("<div class=\"topic-figure cc\">",$_POST['message']);
-if(is_array($message)){
-    $message = $message[0];
-}
+$message = explode("#SLICE#",$_POST['message']);
+$message = $message[0];
 $message = html2bbcode($message);
 $lastposter = $author;
 $status = '32';
@@ -114,14 +112,17 @@ updatemembercount($uid, array('extcredits2' => 2, 'posts' => 1, 'threads' =>1));
 updatemoderate('tid', $tid);
 C::t('forum_forum')->update_forum_counter($fid, 1, 1, 1);
 //attachment upload
-preg_match_all("/src=\"(.*?)\"/",$_POST['message'],$templist);
-foreach($templist[1] as $r){
-    $dir = saveimg($r);
-    if($dir){
-        $aid = uploadimg($dir);
-        $attachnew[$aid]['description']='';
+if(!empty($_POST['attachment'])){
+    preg_match_all("/src=\"(.*?)\"/",$_POST['attachment'],$templist);
+    foreach($templist[1] as $r){
+        $dir = saveimg($r);
+        if($dir){
+            $aid = uploadimg($dir);
+            $attachnew[$aid]['description']='';
+        }
     }
 }
+
 $modnewthreads = false;
 updateattach($modnewthreads, $tid, $pid, $attachnew);
 
