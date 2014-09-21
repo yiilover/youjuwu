@@ -116,6 +116,7 @@ if(!empty($_POST['attachment'])){
     preg_match_all("/src=\"(.*?)\"/",$_POST['attachment'],$templist);
     foreach($templist[1] as $r){
         $dir = saveimg($r);
+        $dir = str_replace('\\','/',$dir);
         if($dir){
             $aid = uploadimg($dir);
             $attachnew[$aid]['description']='';
