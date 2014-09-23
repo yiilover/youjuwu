@@ -32,21 +32,22 @@ if(empty($user)){
     $init_arr = explode(',', $_G['setting']['initcredits']);
     $password = md5(random(10));
     C::t('common_member')->insert($uid, $newusername, $password, $newemail, 'Manual Acting', $_POST['newgroupid'], $init_arr, $newadminid);
+    //user avatar
+    if($_POST['userface']!='http://img3.douban.com/icon/user_normal.jpg'){
+        $filename = basename($_POST['userface']);
+        preg_match("/u([0-9]*?)-/",$filename,$return);
+        $avatarnum = $return[1];
+        $imgurl = 'http://img3.douban.com/icon/ul'.$avatarnum.'.jpg';
+        $dir = saveimg($imgurl,'user');
+        uploadavatar($dir,$uid);
+    }
 }else{
     $newusername = $user['username'];
     $uid = $user['uid'];
 }
 
 
-//user avatar
-if($_POST['userface']!='http://img3.douban.com/icon/user_normal.jpg'){
-    $filename = basename($_POST['userface']);
-    preg_match("/u([0-9]*?)-/",$filename,$return);
-    $avatarnum = $return[1];
-    $imgurl = 'http://img3.douban.com/icon/ul'.$avatarnum.'.jpg';
-    $dir = saveimg($imgurl,'user');
-    uploadavatar($dir,$uid);
-}
+
 
 
 
@@ -67,6 +68,8 @@ $message = html2bbcode($message);
 $lastposter = $author;
 $status = '32';
 $icon = '-1';
+
+if(C::t('forum_thread')->fetch_all_by_authorid_and_subject($authorid, $subject)) exit();
 
 $newthread = array(
     'fid' => $fid,

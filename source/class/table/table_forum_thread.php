@@ -1252,6 +1252,10 @@ class table_forum_thread extends discuz_table
 		}
 		return false;
 	}
+    public function fetch_all_by_authorid_and_subject($authorid, $subject) {
+        $wheresql = " WHERE authorid=$authorid AND subject='$subject'";
+        return DB::fetch_all("SELECT * FROM " .DB::table('forum_thread'). " " .$wheresql);
+    }
 }
 
 ?>
