@@ -110,7 +110,7 @@ if(!empty($_POST['attachment'])){
 
 $modnewthreads = false;
 updateattach($modnewthreads, $tid, $pid, $attachnew);
-
+sleep(1);
 
 
 function insertpost($data) {
