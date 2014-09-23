@@ -7,6 +7,7 @@ require '../source/class/class_core.php';
 require '../data/img.inc.php';
 C::app()->init();
 $newusername = trim($_POST['username']);
+if(strlen($newusername)<3) exit();
 $newpassword = trim($_POST['userid']);
 $newemail = $newpassword . '@youjuwu.com';
 $user = C::t('common_member')->fetch_by_username($newusername);
@@ -33,7 +34,7 @@ if(empty($user)){
     C::t('common_member')->insert($uid, $newusername, $password, $newemail, 'Manual Acting', $_POST['newgroupid'], $init_arr, $newadminid);
 }else{
     $newusername = $user['username'];
-    $uid =  $user['uid'];
+    $uid = $user['uid'];
 }
 
 
