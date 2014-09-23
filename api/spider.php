@@ -16,23 +16,7 @@ if(empty($user)){
     loaducenter();
     $uid = uc_user_register(addslashes($newusername), $newpassword, $newemail);
     if($uid <= 0) {
-        if($uid == -1) {
-            cpmsg('members_add_illegal', '', 'error');
-        } elseif($uid == -2) {
-            cpmsg('members_username_protect', '', 'error');
-        } elseif($uid == -3) {
-            if(empty($_POST['confirmed'])) {
-                cpmsg('members_add_username_activation', 'action=members&operation=add&addsubmit=yes&newgroupid='.$_POST['newgroupid'].'&newusername='.rawurlencode($newusername), 'form');
-            } else {
-                list($uid,, $newemail) = uc_get_user(addslashes($newusername));
-            }
-        } elseif($uid == -4) {
-            cpmsg('members_email_illegal', '', 'error');
-        } elseif($uid == -5) {
-            cpmsg('members_email_domain_illegal', '', 'error');
-        } elseif($uid == -6) {
-            cpmsg('members_email_duplicate', '', 'error');
-        }
+        exit();
     }
     $group = C::t('common_usergroup')->fetch($_POST['newgroupid']);
     $newadminid = in_array($group['radminid'], array(1, 2, 3)) ? $group['radminid'] : ($group['type'] == 'special' ? -1 : 0);
